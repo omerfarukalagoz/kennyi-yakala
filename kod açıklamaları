@@ -1,0 +1,47 @@
+
+    /*
+    
+      -- BÖLÜM 1 (TASARIM) --
+    grid layout constraint ederek işe başladık. 9 adet kenny kullanıcaz. ilk kenny i 100 - 120 dp olarak yerleştirdik.
+    split kısmında ilk kenny nin row ve column = 0 - 0 olarak ayarladık. ardından kopyala yapıştır ile 9 tane tane kenny koyduk.
+    sadece ""id ve row , column"" kısımlarını değiştirdik. 9 adet kenyyi ortalık şekilde ekrana koyduk.
+    üst kısıma "Time: 10" -- alt kısma "Score: 0" textview lerni yerleştirdik.
+
+      -- BÖLÜM 2 (SKORU ARTIRMAK) --
+    her bir resime aynı onclick (skoruArtır) metodu vericez ve bu metodun içine skoru artır kodunu yazıcaz. resimlere tıkladıkça skor aşağıda artıcak.
+    edittext ve textview leri tanımladık. ayriyeten skor = 0 diye bir değişken tanımladık. skoruArtır metodu altında kenny resmine her tıkladığımızda
+    skoru 1 artırıcak kodu yazdık ve bunu asagıda skor: şeklinde yazdırdık.
+
+    -- BÖLÜM 3 (GERİYE SAYMAK) --
+    new CountDownTimer(10000,1000){ } kullanarak  (10 saniye boyunca 1 er saniye aralıklarla geri sayacak)
+    geriye saydırma işini hallediyoruz. on finish kısmı şimdilik bilerek boş bıraktık buraya geri dönücez.
+
+    -- BÖLÜM 4 (GÖRSEL DİZİSİ) kenny örünmez olacak --
+    kenny i ""for"" döngüsü ile hareket ettiricez. fakat bunun için resimleri bir ""dizi"" içerisine almamız lazım.
+    ImageView imageView1;  --     imageView1 = findViewById(R.id.imageView1);   ---  şeklinde 9 tane resmi tanımladık.
+    ImageView[] imageArray; --    imageArray = new ImageView[]{imageView1, imageView2, ...}; şeklinde  dizimizi de tanımladık.
+    public void resimleriSakla(){ } bu metod ile uygulama (onCreate) ilk açıldığında resimleri saklıycaz ve ardından random olarak resimleri aç kapa yapacaz.
+    for(ImageView image : imageArray){    --  for(int sayi : sayilar) foreach
+    image.setVisibility(View.INVISIBLE);}   --  burada metodu oncreate ye çagırdıgımız için uygulama açılır açılmaz resimler görünmez olacak(saklanacak)
+
+    -- BÖLÜM 5 (KENNY HAREKET EDİYOR) --
+   artık keny nin yarım saniyede bir random yerlerde ortaya çıkıp tekrar yok olması gerekiyor (tıklarsak skor +1).
+   bunu ""runnable"" ile yapabiliriz. çünkü runnable her saniyede her yarım saniyede 1 bir şey yaptırmak için bize olanak sağlıyor
+   ""hundler"" runnableyi kullanabilmek için bize gereken bir sınıf. runnable ve handler ı  handler = new Handler(); --  runnable = new Runnable() şeklinde tanımlıyoruz.
+   resimleriSakle metodu altında tanımladıkan sonra for döngüsünü runnable altında -- run metodu altında çağrıcaz.  çünkü  saniyede bir mesela her diziyi görünmez hale getiricez.
+   ardından rastgele bir resmi açıcaz (dizi içerisinde görünür hale getiricez).
+   Random random = new Random();  --  bu şeklide random sınıfını oluşturduk
+   int i = random.nextInt(9);   --   bana 0 - 8 arası rastgele sayi üretir. dizilerin endeksi 0 dan başlar.
+   ***imageArray[i].setVisibility(View.VISIBLE);***    --  imagearray içindeki 0 . endeksi görünür hale getirir. rastgele olması için i tanımladık.
+   handler.postDelayed(runnable, 500);   --  runnable yi yarım saniyede bir çalıştır.
+   en sonunda handler.post(runnable);  --  diyerek runnableyi başlatıyoruz.
+
+   -- BÖLÜM 6 (ZAMABİTİNCE) --
+   zaman dolduğu halde kenny hala hareket ediyor ve üstüne tıkladıkça skor artmaya devam ediyor. önceden boş bıraktığımız onfinish (zaman bitince) metodu altında bu işi halledecez.
+   geri kalan işlemleri sayaç altında onfinish altında yazmaya devam edecez. önce zaman doldu yazdırı, kennyleri tekrar sakladık,
+   ardından yeniden oynamak istemek ister mi diye alert butonu koyuyoruz. evet e tıklarsa oyun yeniden başlıycak. hayıra tıklarsa oyun biticek (toast yazdırdık).
+   oyunu yeniden başlatmak için Intent kullandık. finish(); metodu ile önce bir bitirdik. ardından restart attık.
+
+
+
+ */
